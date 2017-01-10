@@ -20,6 +20,7 @@
 import PerfectLib
 import PerfectHTTP
 import PerfectHTTPServer
+import SQLiteStORM
 
 // An example request handler.
 // This 'handler' function can be referenced directly in the configuration below.
@@ -28,7 +29,7 @@ func handler(data: [String:Any]) throws -> RequestHandler {
 		request, response in
 		// Respond with a simple message.
 		response.setHeader(.contentType, value: "text/html")
-		response.appendBody(string: "<html><title>Hello, world!</title><body>Hello, world!</body></html>")
+		response.appendBody(string: "<html><title>Hello, shipments!</title><body><p>You can get use this system to retrieve data about our shipments</p><ul><li><a href=\"/count\">Get a count!</a></li></ul></body></html>")
 		// Ensure that response.completed() is called when your processing is done.
 		response.completed()
 	}
@@ -40,7 +41,7 @@ func handler(data: [String:Any]) throws -> RequestHandler {
 
 let port1 = 8080, port2 = 8181
 
-let confData = [
+let config = [
 	"servers": [
 		// Configuration data for one server which:
 		//	* Serves the hello world message at <host>:<port>/
@@ -48,10 +49,11 @@ let confData = [
 		//		directory (which must be located in the current working directory).
 		//	* Performs content compression on outgoing data when appropriate.
 		[
-			"name":"localhost",
+			"name":"Public API",
 			"port":port1,
 			"routes":[
 				["method":"get", "uri":"/", "handler":handler],
+				["method":"get", "uri":"/count", "handler": count],
 				["method":"get", "uri":"/**", "handler":PerfectHTTPServer.HTTPHandler.staticFiles,
 				 "documentRoot":"./webroot",
 				 "allowResponseFilters":true]
@@ -67,7 +69,7 @@ let confData = [
 		// Configuration data for another server which:
 		//	* Redirects all traffic back to the first server.
 		[
-			"name":"localhost",
+			"name":"Private API",
 			"port":port2,
 			"routes":[
 				["method":"get", "uri":"/**", "handler":PerfectHTTPServer.HTTPHandler.redirect,
@@ -77,9 +79,12 @@ let confData = [
 	]
 ]
 
+SQLiteConnector.db = "./db/database"
+
 do {
 	// Launch the servers based on the configuration data.
-	try HTTPServer.launch(configurationData: confData)
+	try HTTPServer.launch(configurationData: config)
+    Database().create()
 } catch {
 	fatalError("\(error)") // fatal error launching one of the servers
 }
