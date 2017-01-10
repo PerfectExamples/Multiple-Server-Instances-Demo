@@ -6,6 +6,7 @@
 #Project
 .build
 .build_lin
+.packages_lin
 buildlinux
 Packages
 db/
@@ -18,6 +19,7 @@ db/
 DerivedData/
 build/
 build_lin/
+packages_lin/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
