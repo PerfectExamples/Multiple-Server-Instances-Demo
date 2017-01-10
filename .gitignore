@@ -5,8 +5,11 @@
 
 #Project
 .build
+.build_lin
+buildlinux
 Packages
 db/
+*.orig
 
 #Xcode
 *~.nib
@@ -14,6 +17,7 @@ db/
 *.xcworkspace
 DerivedData/
 build/
+build_lin/
 *.pbxuser
 !default.pbxuser
 *.mode1v3
