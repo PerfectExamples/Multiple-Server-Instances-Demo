@@ -102,12 +102,12 @@ To use /create, make a post request with the following keys and whatever values 
 
 ```
 {
-"toAddress":"1234 Test Ln",
-"shippingHub":"Tampa, FL"
+"destination":"1234 Test Ln",
+"hub":"Tampa, FL"
 }
 ```
 
-Where toAddress is the address the shipment is going to, and shippingHub is the identifier for the shipping hub/terminal/office (where it's originating from, and what will become the last known location). 
+Where `destination` is the address the shipment is going to, and `hub` is the identifier for the shipping hub/terminal/office (where it's originating from, and what will become the last known location). 
 
 The API will return JSON with information about the shipment, including the new tracking number it generated. It should look like this:
 

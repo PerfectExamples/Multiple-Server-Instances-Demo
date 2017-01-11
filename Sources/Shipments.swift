@@ -165,7 +165,7 @@ struct Shipments {
         do {
             let dict = try json.jsonDecode() as! [String: String]
             
-            if let toAddress = dict["toAddress"], let shipmentHub = dict["shippingHub"] {
+            if let toAddress = dict["destination"], let shipmentHub = dict["hub"] {
                 response = createNewShipment(toAddress: toAddress, fromTerminal: shipmentHub)
             }
         } catch {

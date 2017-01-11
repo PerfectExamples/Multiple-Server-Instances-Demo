@@ -68,7 +68,6 @@ struct ShipmentManager {
         } catch {
             throw error
         }
-        print("Object fetched with id of: \(getObj.id), and tracking number of: \(getObj.trackingNumber)")
         
         if getObj.trackingNumber == "Error" {
             throw shipmentError.unableToRetrieve
