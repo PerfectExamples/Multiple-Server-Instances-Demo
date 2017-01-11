@@ -67,6 +67,92 @@ You should see the following output:
 
 This means the servers are running and waiting for connections. Access the public API routes at [http://localhost:8080/](http://127.0.0.1:8080/) and the private API routes at [http://localhost:8181/](http://127.0.0.1:8181/). Hit control-c to terminate the server.
 
+## Testing
+
+The public API routes at [http://localhost:8080/](http://127.0.0.1:8080/) are:
+
+/ (This only returns a welcome message)
+/track
+
+### /track
+
+To use track, use your favorite http client to make a post request to /track with a JSON body including the key `trackingNumber` and the value of the tracking number you would like to track (assuming one has been created). Example:
+
+```
+{"trackingNumber":"13100E4F-6878-4E80-B93A-22B84AD0A11E"}
+```
+
+The private API routes at [http://localhost:8181/](http://127.0.0.1:8181/) are:
+
+/ (This only returns a welcome message)
+/track (works the same as above)
+/count
+/create
+/update
+/set/delivered
+/delete
+
+### /count
+
+To use /count, you make a get request. It will return JSON containing a count of the number of shipments in the database. 
+
+### /create
+
+To use /create, make a post request with the following keys and whatever values you would like:
+
+```
+{
+"toAddress":"1234 Test Ln",
+"shippingHub":"Tampa, FL"
+}
+```
+
+Where toAddress is the address the shipment is going to, and shippingHub is the identifier for the shipping hub/terminal/office (where it's originating from, and what will become the last known location). 
+
+The API will return JSON with information about the shipment, including the new tracking number it generated. It should look like this:
+
+```
+{"LastLocation":"Tampa, FL","Destination":"1234 Test Ln","Tracking Number":"895AFBF2-265D-4F56-81E1-E7336EAEEF10"}
+```
+
+### /update
+
+To use /create, make a post request with the following keys and whatever values you would like (or you can include only one, such as only updating the current hub for tracking):
+
+```
+{
+"trackingNumber":"895AFBF2-265D-4F56-81E1-E7336EAEEF10",
+"destination":"1235 Test Ln, Tampa, FL 34200",
+"hub":"Houston, TX"
+}
+```
+
+The API will respond with {"success": true} (or false if it failed)
+
+### /set/delivered
+
+To mark a shipment delivered, make a post request with the tracking number to /set/delivered, i.e.:
+
+```
+{
+"trackingNumber":"895AFBF2-265D-4F56-81E1-E7336EAEEF10"
+}
+```
+
+The API will respond with {"success": true} (or false if it failed)
+
+### /delete
+
+To delete a shipment from the database, make a post request with the tracking number to /set/delivered, i.e.:
+
+```
+{
+"trackingNumber":"895AFBF2-265D-4F56-81E1-E7336EAEEF10"
+}
+```
+
+The API will respond with {"success": true} (or false if it failed)
+
 ## Issues
 
 We are transitioning to using JIRA for all bugs and support related issues, therefore the GitHub issues has been disabled.
