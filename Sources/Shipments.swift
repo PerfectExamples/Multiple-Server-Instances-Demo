@@ -115,4 +115,33 @@ struct Shipments {
         
         return response
     }
+    
+    func setShipmentDelivered(usingTrackingNumber trackingNumber: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            try ShipmentManager().setShipmentDelivered(usingTrackingNumber: trackingNumber)
+            response = "{\"success\": true}"
+        } catch {
+            print("Failed to Mark Shipment as Delivered")
+        }
+        
+        return response
+    }
+    
+    func setShipmentDelivered(withJSONRequest json: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            let dict = try json.jsonDecode() as! [String: String]
+            
+            if let trackingNumber = dict["trackingNumber"] {
+                response = setShipmentDelivered(usingTrackingNumber: trackingNumber)
+            }
+        } catch {
+            print("Failed to Mark Shipment as Delivered")
+        }
+        
+        return response
+    }
 }

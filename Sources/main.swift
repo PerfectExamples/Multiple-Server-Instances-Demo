@@ -27,7 +27,7 @@ let publicRoutes = [
 let privateRoutes = publicRoutes + [
     ["method":"get", "uri":"/count", "handler": count],
     ["method":"post", "uri":"/new", "handler": handler],
-    ["method":"post", "uri":"/set/delivered", "handler": handler],
+    ["method":"post", "uri":"/set/delivered", "handler": setShipmentDelivered],
     ["method":"post", "uri":"/update", "handler": updateShipment],
     ["method":"post", "uri":"/delete", "handler": removeShipment],
 ]

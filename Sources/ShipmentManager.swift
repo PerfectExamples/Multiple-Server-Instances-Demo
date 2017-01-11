@@ -114,4 +114,18 @@ struct ShipmentManager {
         
     }
     
+    func setShipmentDelivered(usingTrackingNumber trackingNumber: String) throws {
+        
+        do {
+            let shipment = try getShipment(fromTrackingNumber: trackingNumber)
+            
+            shipment.setDelivered()
+            try shipment.save()
+            
+        } catch {
+            throw error
+        }
+        
+    }
+    
 }
