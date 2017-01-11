@@ -18,6 +18,7 @@ Database().create()
 // using a configuration dictionary.
 
 let port1 = 8080, port2 = 8181
+let privateAPIKey = "13100E4F22B84AD0A11E"
 
 let publicRoutes = [
     ["method":"get", "uri":"/", "handler":handler],
