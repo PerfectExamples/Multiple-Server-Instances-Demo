@@ -29,7 +29,7 @@ struct Shipments {
         
         do {
             let shipment = try ShipmentManager().getShipment(fromTrackingNumber: trackingNumber)
-            let data: [String: Any] = ["Tracking Number": shipment.trackingNumber, "LastLocation": shipment.lastLocation, "Destination": shipment.destination]
+            let data: [String: Any] = ["trackingNumber": shipment.trackingNumber, "lastLocation": shipment.lastLocation, "destination": shipment.destination]
             response = try data.jsonEncodedString()
         } catch {
             print("Failed to get tracking information for shipment")
@@ -150,7 +150,7 @@ struct Shipments {
         
         do {
             let shipment = try ShipmentManager().createNewShipment(toAddress: address, fromTerminal: terminal)
-            let data: [String: Any] = ["Tracking Number": shipment.trackingNumber, "LastLocation": shipment.lastLocation, "Destination": shipment.destination]
+            let data: [String: Any] = ["trackingNumber": shipment.trackingNumber, "lastLocation": shipment.lastLocation, "destination": shipment.destination]
             response = try data.jsonEncodedString()
         } catch {
             print("Failed to Create Shipment")
