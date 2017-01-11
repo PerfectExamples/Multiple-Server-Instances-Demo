@@ -82,4 +82,37 @@ struct Shipments {
         
         return response
     }
+    
+    func updateShipment(usingTrackingNumber trackingNumber: String, withNewDestination destination: String? = nil, updateLastLocation hub: String?) -> String {
+        
+        var response = "{\"success\": false}"
+        
+        do {
+            try ShipmentManager().updateShipment(usingTrackingNumber: trackingNumber, withNewDestination: destination, updateLastLocation: hub)
+            response = "{\"success\": true}"
+        } catch {
+            print("Failed to update Shipment with Tracking Number: \(trackingNumber)")
+        }
+        
+        return response
+    }
+    
+    func updateShipment(withJSONRequest json: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            let dict = try json.jsonDecode() as! [String: String]
+            
+            let destination = dict["destination"] ?? nil
+            let hub = dict["hub"] ?? nil
+            
+            if let trackingNumber = dict["trackingNumber"] {
+                response = updateShipment(usingTrackingNumber: trackingNumber, withNewDestination: destination, updateLastLocation: hub)
+            }
+        } catch {
+            print("Failed to Delete Shipment")
+        }
+        
+        return response
+    }
 }
