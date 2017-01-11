@@ -51,3 +51,16 @@ func trackShipment(data: [String:Any]) throws -> RequestHandler {
         response.completed()
     }
 }
+
+func removeShipment(data: [String:Any]) throws -> RequestHandler {
+    return {
+        request, response in
+        
+        // Setting the response content type explicitly to application/json
+        response.setHeader(.contentType, value: "application/json")
+        // Tracking a shipment using incoming JSON
+        response.appendBody(string: Shipments().deleteShipment(withJSONRequest: request.postBodyString ?? "Empty Body"))
+        // Signalling that the request is completed
+        response.completed()
+    }
+}

@@ -45,12 +45,39 @@ struct Shipments {
             let dict = try json.jsonDecode() as! [String: String]
             
             if let trackingNumber = dict["trackingNumber"] {
-                let shipment = try ShipmentManager().getShipment(fromTrackingNumber: trackingNumber)
-                let data: [String: Any] = ["Tracking Number": shipment.trackingNumber, "LastLocation": shipment.lastLocation, "Destination": shipment.destination, "Delivered": shipment.isDelivered]
-                response = try data.jsonEncodedString()
+                response = trackShipment(withTrackingNumber: trackingNumber)
             }
         } catch {
             print("Failed to get shipment information for tracking number")
+        }
+        
+        return response
+    }
+    
+    func deleteShipment(withTrackingNumber trackingNumber: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            try ShipmentManager().removeShipment(usingTrackingNumber: trackingNumber)
+            response = "{\"success\": true}"
+        } catch {
+            print("Failed to Delete Shipment with Tracking Number: \(trackingNumber)")
+        }
+        
+        return response
+    }
+    
+    func deleteShipment(withJSONRequest json: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            let dict = try json.jsonDecode() as! [String: String]
+            
+            if let trackingNumber = dict["trackingNumber"] {
+                response = deleteShipment(withTrackingNumber: trackingNumber)
+            }
+        } catch {
+            print("Failed to Delete Shipment")
         }
         
         return response

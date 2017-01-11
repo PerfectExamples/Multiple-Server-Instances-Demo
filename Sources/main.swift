@@ -1,21 +1,10 @@
 //
-//  main.swift
-//  PerfectTemplate
+//  Shipment.swift
+//  MultipleServerInstances
 //
-//  Created by Kyle Jessup on 2015-11-05.
-//	Copyright (C) 2015 PerfectlySoft, Inc.
+//  Created by Ryan Collins on 1/10/17.
 //
-//===----------------------------------------------------------------------===//
-//
-// This source file is part of the Perfect.org open source project
-//
-// Copyright (c) 2015 - 2016 PerfectlySoft Inc. and the Perfect project authors
-// Licensed under Apache License v2.0
-//
-// See http://perfect.org/licensing.html for license information
-//
-//===----------------------------------------------------------------------===//
-//
+//  Modified from the Perfect Template Project
 
 import PerfectLib
 import PerfectHTTP
@@ -37,10 +26,10 @@ let publicRoutes = [
 
 let privateRoutes = publicRoutes + [
     ["method":"get", "uri":"/count", "handler": count],
-    ["method":"get", "uri":"/new", "handler": handler],
-    ["method":"get", "uri":"/delivered", "handler": handler],
-    ["method":"get", "uri":"/update", "handler": handler],
-    ["method":"get", "uri":"/delete", "handler": handler],
+    ["method":"post", "uri":"/new", "handler": handler],
+    ["method":"post", "uri":"/set/delivered", "handler": handler],
+    ["method":"post", "uri":"/update", "handler": handler],
+    ["method":"post", "uri":"/delete", "handler": removeShipment],
 ]
 
 let config = [
@@ -60,7 +49,7 @@ let config = [
 			]
 		],
 		// Configuration data for another server which:
-		//	* Serves Private Routes, as well as public API routes
+		//	* Serves Private Routes, as well as all public API routes
 		[
 			"name":"Private API",
 			"port":port2,

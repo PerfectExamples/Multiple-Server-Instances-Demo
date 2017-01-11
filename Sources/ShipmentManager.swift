@@ -103,4 +103,15 @@ struct ShipmentManager {
         }
     }
     
+    func removeShipment(usingTrackingNumber trackingNumber: String) throws {
+        
+        do {
+            let shipment = try getShipment(fromTrackingNumber: trackingNumber)
+            try shipment.delete()
+        } catch {
+            throw error
+        }
+        
+    }
+    
 }
