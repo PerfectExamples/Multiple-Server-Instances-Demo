@@ -43,6 +43,12 @@ Database().create()
 
 let port1 = 8080, port2 = 8181
 
+let publicRoutes = [
+    ["method":"get", "uri":"/", "handler":handler],
+    ["method":"get", "uri":"/count", "handler": count],
+    ["method": "post", "uri":"/track", "handler": trackShipment],
+]
+
 let config = [
 	"servers": [
 		// Configuration data for one server which:
@@ -53,14 +59,7 @@ let config = [
 		[
 			"name":"Public API",
 			"port":port1,
-			"routes":[
-				["method":"get", "uri":"/", "handler":handler],
-				["method":"get", "uri":"/count", "handler": count],
-				["method": "post", "uri":"/track", "handler": trackShipment],
-				["method":"get", "uri":"/**", "handler":PerfectHTTPServer.HTTPHandler.staticFiles,
-				 "documentRoot":"./webroot",
-				 "allowResponseFilters":true]
-			],
+			"routes": publicRoutes,
 			"filters":[
 				[
 				"type":"response",

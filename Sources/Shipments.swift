@@ -46,7 +46,7 @@ struct Shipments {
             
             if let trackingNumber = dict["trackingNumber"] {
                 let shipment = try ShipmentManager().getShipment(fromTrackingNumber: trackingNumber)
-                let data: [String: Any] = ["Tracking Number": shipment.trackingNumber, "LastLocation": shipment.lastLocation, "Destination": shipment.destination]
+                let data: [String: Any] = ["Tracking Number": shipment.trackingNumber, "LastLocation": shipment.lastLocation, "Destination": shipment.destination, "Delivered": shipment.isDelivered]
                 response = try data.jsonEncodedString()
             }
         } catch {

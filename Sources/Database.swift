@@ -32,7 +32,7 @@ struct Database {
                 sqlite.close() // This makes sure we close our connection.
             }
             
-            try sqlite.execute(statement: "CREATE TABLE IF NOT EXISTS shipments (id INTEGER PRIMARY KEY NOT NULL, trackingNumber TEXT NOT NULL, lastLocation TEXT NOT NULL, destination TEXT NOT NULL)")
+            try sqlite.execute(statement: "CREATE TABLE IF NOT EXISTS shipments (id INTEGER PRIMARY KEY NOT NULL, trackingNumber TEXT NOT NULL, lastLocation TEXT NOT NULL, destination TEXT NOT NULL, delivered INTERGER NOT NULL DEFAULT 0)")
         } catch {
             print("Failure creating database at \(database)")
         }

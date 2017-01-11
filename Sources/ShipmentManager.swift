@@ -39,7 +39,7 @@ struct ShipmentManager {
         let trackingNumber = UUID()
         
         do {
-            let _ = try obj.insert(cols: ["tracking_number", "last_hub", "destination"], params: ["\(trackingNumber)", terminal, address])
+            let _ = try obj.insert(cols: ["trackingNumber", "lastLocation", "destination"], params: ["\(trackingNumber)", terminal, address])
         } catch {
             throw error
         }
