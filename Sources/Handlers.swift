@@ -17,7 +17,7 @@ func handler(data: [String:Any]) throws -> RequestHandler {
         request, response in
         // Respond with a simple message.
         response.setHeader(.contentType, value: "text/html")
-        response.appendBody(string: "<html><title>Hello, shipments!</title><body><p>You can get use this system to retrieve data about our shipments, such as sending a json post request to /track with a trackingNumber property containing the number you would like to track, assuming shipments have been added.</p></body></html>")
+        response.appendBody(string: "<html><title>Hello, shipments!</title><body><p>You can use this system to retrieve data about our shipments, such as sending a json post request to /track with a trackingNumber property containing the number you would like to track, assuming shipments have been added.</p></body></html>")
         // Ensure that response.completed() is called when your processing is done.
         response.completed()
     }
@@ -45,7 +45,7 @@ func trackShipment(data: [String:Any]) throws -> RequestHandler {
         
         // Setting the response content type explicitly to application/json
         response.setHeader(.contentType, value: "application/json")
-        // Adding a new "person", passing the just the request's post body as a raw string to the function.
+        // Tracking a shipment using incoming JSON
         response.appendBody(string: Shipments().trackShipment(withJSONRequest: request.postBodyString ?? "Empty Body"))
         // Signalling that the request is completed
         response.completed()
