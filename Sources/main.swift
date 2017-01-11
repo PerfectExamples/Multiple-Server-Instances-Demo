@@ -22,19 +22,6 @@ import PerfectHTTP
 import PerfectHTTPServer
 import SQLiteStORM
 
-// An example request handler.
-// This 'handler' function can be referenced directly in the configuration below.
-func handler(data: [String:Any]) throws -> RequestHandler {
-	return {
-		request, response in
-		// Respond with a simple message.
-		response.setHeader(.contentType, value: "text/html")
-		response.appendBody(string: "<html><title>Hello, shipments!</title><body><p>You can get use this system to retrieve data about our shipments</p><ul><li><a href=\"/count\">Get a count!</a></li></ul></body></html>")
-		// Ensure that response.completed() is called when your processing is done.
-		response.completed()
-	}
-}
-
 Database().create()
 
 // Configuration data for two example servers.
@@ -45,17 +32,21 @@ let port1 = 8080, port2 = 8181
 
 let publicRoutes = [
     ["method":"get", "uri":"/", "handler":handler],
-    ["method":"get", "uri":"/count", "handler": count],
     ["method": "post", "uri":"/track", "handler": trackShipment],
+]
+
+let privateRoutes = publicRoutes + [
+    ["method":"get", "uri":"/count", "handler": count],
+    ["method":"get", "uri":"/new", "handler": handler],
+    ["method":"get", "uri":"/delivered", "handler": handler],
+    ["method":"get", "uri":"/update", "handler": handler],
+    ["method":"get", "uri":"/delete", "handler": handler],
 ]
 
 let config = [
 	"servers": [
 		// Configuration data for one server which:
-		//	* Serves the hello world message at <host>:<port>/
-		//	* Serves static files out of the "./webroot"
-		//		directory (which must be located in the current working directory).
-		//	* Performs content compression on outgoing data when appropriate.
+		//	* Serves only public API routes
 		[
 			"name":"Public API",
 			"port":port1,
@@ -69,14 +60,11 @@ let config = [
 			]
 		],
 		// Configuration data for another server which:
-		//	* Redirects all traffic back to the first server.
+		//	* Serves Private Routes, as well as public API routes
 		[
 			"name":"Private API",
 			"port":port2,
-			"routes":[
-				["method":"get", "uri":"/**", "handler":PerfectHTTPServer.HTTPHandler.redirect,
-				 "base":"http://localhost:\(port1)"]
-			]
+			"routes": privateRoutes
 		]
 	]
 ]

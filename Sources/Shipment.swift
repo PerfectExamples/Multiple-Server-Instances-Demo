@@ -43,4 +43,8 @@ class Shipment: SQLiteStORM {
         }
         return rows
     }
+    
+    func setDelivered() {
+        self.delivered = 1
+    }
 }
