@@ -40,13 +40,6 @@ let config = [
 			"name":"Public API",
 			"port":port1,
 			"routes": publicRoutes,
-			"filters":[
-				[
-				"type":"response",
-				"priority":"high",
-				"name":PerfectHTTPServer.HTTPFilter.contentCompression,
-				]
-			]
 		],
 		// Configuration data for another server which:
 		//	* Serves Private Routes, as well as all public API routes
