@@ -15,15 +15,15 @@ class Shipment: SQLiteStORM {
     var id: Int = 0
     var trackingNumber: String = "DEFAULT"
     var lastLocation: String = "Toronto, ON"
-    var destinationAddress: String = "1234 Main St., New York, NY 10001"
+    var destination: String = "1234 Main St., New York, NY 10001"
     
     override open func table() -> String { return "shipments" }
     
     override func to(_ this: StORMRow) {
         id = this.data["id"] as? Int ?? 0
-        trackingNumber = this.data["tracking_number"] as? String ?? "Unknown Tracking Number"
-        lastLocation = this.data["last_hub"] as? String ?? "Not Yet Available"
-        destinationAddress = this.data["destination"] as? String ?? "Not on File"
+        trackingNumber = this.data["trackingNumber"] as? String ?? "Unknown Tracking Number"
+        lastLocation = this.data["lastLocation"] as? String ?? "Not Yet Available"
+        destination = this.data["destination"] as? String ?? "Not on File"
     }
     
     func rows() -> [Shipment] {

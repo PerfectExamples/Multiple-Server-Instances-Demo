@@ -35,6 +35,8 @@ func handler(data: [String:Any]) throws -> RequestHandler {
 	}
 }
 
+Database().create()
+
 // Configuration data for two example servers.
 // This example configuration shows how to launch one or more servers 
 // using a configuration dictionary.
@@ -54,6 +56,7 @@ let config = [
 			"routes":[
 				["method":"get", "uri":"/", "handler":handler],
 				["method":"get", "uri":"/count", "handler": count],
+				["method": "post", "uri":"/track", "handler": trackShipment],
 				["method":"get", "uri":"/**", "handler":PerfectHTTPServer.HTTPHandler.staticFiles,
 				 "documentRoot":"./webroot",
 				 "allowResponseFilters":true]
@@ -84,7 +87,6 @@ SQLiteConnector.db = "./db/database"
 do {
 	// Launch the servers based on the configuration data.
 	try HTTPServer.launch(configurationData: config)
-    Database().create()
 } catch {
 	fatalError("\(error)") // fatal error launching one of the servers
 }

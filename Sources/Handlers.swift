@@ -26,3 +26,16 @@ func count(data: [String:Any]) throws -> RequestHandler {
         response.completed()
     }
 }
+
+func trackShipment(data: [String:Any]) throws -> RequestHandler {
+    return {
+        request, response in
+        
+        // Setting the response content type explicitly to application/json
+        response.setHeader(.contentType, value: "application/json")
+        // Adding a new "person", passing the just the request's post body as a raw string to the function.
+        response.appendBody(string: Shipments().trackShipment(withJSONRequest: request.postBodyString ?? "Empty Body"))
+        // Signalling that the request is completed
+        response.completed()
+    }
+}

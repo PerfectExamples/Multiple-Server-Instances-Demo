@@ -53,7 +53,7 @@ struct ShipmentManager {
         let getObj = Shipment()
         var findObj = [String:Any]()
         
-        findObj["tracking_number"] = trackingNumber
+        findObj["trackingNumber"] = trackingNumber
         
         do {
             try getObj.find(findObj)
@@ -89,7 +89,7 @@ struct ShipmentManager {
             let shipment = try getShipment(fromTrackingNumber: trackingNumber)
             
             if let address = destination {
-                shipment.destinationAddress = address
+                shipment.destination = address
             }
             
             if let location = hub {
