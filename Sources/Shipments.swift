@@ -144,4 +144,34 @@ struct Shipments {
         
         return response
     }
+    
+    func createNewShipment(toAddress address: String, fromTerminal terminal: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            let shipment = try ShipmentManager().createNewShipment(toAddress: address, fromTerminal: terminal)
+            let data: [String: Any] = ["Tracking Number": shipment.trackingNumber, "LastLocation": shipment.lastLocation, "Destination": shipment.destination]
+            response = try data.jsonEncodedString()
+        } catch {
+            print("Failed to Create Shipment")
+        }
+        
+        return response
+    }
+    
+    func createNewShipment(withJSONRequest json: String) -> String {
+        var response = "{\"success\": false}"
+        
+        do {
+            let dict = try json.jsonDecode() as! [String: String]
+            
+            if let toAddress = dict["toAddress"], let shipmentHub = dict["shippingHub"] {
+                response = createNewShipment(toAddress: toAddress, fromTerminal: shipmentHub)
+            }
+        } catch {
+            print("Failed to Mark Shipment as Delivered")
+        }
+        
+        return response
+    }
 }
