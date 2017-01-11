@@ -35,11 +35,15 @@ struct ShipmentManager {
     
     func createNewShipment(toAddress address: String, fromTerminal terminal: String) throws -> Shipment {
         
-        let obj = Shipment()
         let trackingNumber = UUID()
         
+        let obj = Shipment()
+        obj.trackingNumber = "\(trackingNumber)"
+        obj.destination = address
+        obj.lastLocation = terminal
+        
         do {
-            let _ = try obj.insert(cols: ["trackingNumber", "lastLocation", "destination"], params: ["\(trackingNumber)", terminal, address])
+            try obj.save {id in obj.id = id as! Int }
         } catch {
             throw error
         }
