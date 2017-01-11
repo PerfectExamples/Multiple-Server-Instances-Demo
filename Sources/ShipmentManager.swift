@@ -9,6 +9,10 @@
 import Foundation
 import SQLiteStORM
 
+enum shipmentError: Error {
+    case unableToRetrieve
+}
+
 struct ShipmentManager {
     
     func countTotalShipments() throws -> Int {
@@ -66,7 +70,12 @@ struct ShipmentManager {
         }
         print("Object fetched with id of: \(getObj.id), and tracking number of: \(getObj.trackingNumber)")
         
+        if getObj.trackingNumber == "Error" {
+            throw shipmentError.unableToRetrieve
+        }
+        
         return getObj
+        
     }
     
     func getShipments(forAddress address: String) throws -> [Shipment] {
@@ -100,7 +109,7 @@ struct ShipmentManager {
                 shipment.lastLocation = location
             }
             
-            try shipment.save()
+            try shipment.update(cols: ["lastLocation", "destination"], params: ["\(shipment.lastLocation)", "\(shipment.destination)"], idName: "id", idValue: shipment.id)
             
         } catch {
             throw error

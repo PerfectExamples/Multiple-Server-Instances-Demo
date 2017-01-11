@@ -127,7 +127,7 @@ To use /create, make a post request with the following keys and whatever values 
 }
 ```
 
-The API will respond with {"success": true} (or false if it failed)
+The API will respond with {"success": true} (or false if it encountered any errors)
 
 ### /set/delivered
 
@@ -139,7 +139,7 @@ To mark a shipment delivered, make a post request with the tracking number to /s
 }
 ```
 
-The API will respond with {"success": true} (or false if it failed)
+The API will respond with {"success": true} (or false if it encountered any errors)
 
 ### /delete
 
@@ -151,7 +151,7 @@ To delete a shipment from the database, make a post request with the tracking nu
 }
 ```
 
-The API will respond with {"success": true} (or false if it failed)
+The API will respond with {"success": true} (or false if it encountered any errors)
 
 ## Issues
 
