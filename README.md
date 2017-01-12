@@ -75,6 +75,12 @@ You should see the following output:
 
 This means the servers are running and waiting for connections. Access the public API routes at [http://localhost:8080/](http://127.0.0.1:8080/) and the private API routes at [http://localhost:8181/](http://127.0.0.1:8181/). Hit control-c to terminate the server.
 
+### IMPORTANT NOTE ABOUT XCODE
+
+If you choose to generate an Xcode Project, you **MUST** change to the executable target **AND** setup a custom working directory for its scheme in order for the database to create and work properly. 
+
+![Proper Xcode Setup](https://github.com/rymcol/MultipleServerInstances/raw/master/Supporting/xcode.png)
+
 ## Testing
 
 The public API routes at [http://localhost:8080/](http://127.0.0.1:8080/) are:
