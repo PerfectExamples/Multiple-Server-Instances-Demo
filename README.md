@@ -137,7 +137,7 @@ The API will return JSON with information about the shipment, including the new 
 
 ### /update
 
-To use /create, make a post request with the following keys and whatever values you would like (or you can include only one, such as only updating the current hub for tracking):
+To use /update, make a post request with the following keys and whatever values you would like (or you can include only one, such as only updating the current hub for tracking):
 
 ```
 {
