@@ -79,8 +79,8 @@ This means the servers are running and waiting for connections. Access the publi
 
 The public API routes at [http://localhost:8080/](http://127.0.0.1:8080/) are:
 
-/ (This only returns a welcome message)
-/track
+- / (This only returns a welcome message)
+- /track
 
 ### /track
 
@@ -92,13 +92,13 @@ To use track, use your favorite http client to make a post request to /track wit
 
 The private API routes at [http://localhost:8181/](http://127.0.0.1:8181/) are:
 
-/ (This only returns a welcome message)
-/track (works the same as above)
-/count
-/create
-/update
-/set/delivered
-/delete
+- / (This only returns a welcome message)
+- /track (works the same as above)
+- /count
+- /create
+- /update
+- /set/delivered
+- /delete
 
 ### IMPORTANT NOTE ABOUT THE PRIVATE API
 
