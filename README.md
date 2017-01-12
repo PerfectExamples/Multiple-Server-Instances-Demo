@@ -2,7 +2,7 @@
 
 <p align="center">
     <a href="http://perfect.org/get-involved.html" target="_blank">
-        <img src="http://perfect.org/assets/github/perfect_github_2_0_0.jpg" alt="Get Involed with Perfect!" width="854" />
+        <img src="http://perfect.org/assets/github/perfect_github_2_0_0.jpg" alt="Get Involved with Perfect!" width="854" />
     </a>
 </p>
 
