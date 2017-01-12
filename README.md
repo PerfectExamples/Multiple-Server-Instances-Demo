@@ -43,6 +43,14 @@ This repository holds a project designed to show you how to setup and use multip
 
 In this example, you are designing an API for a shipping company, when you realize that you need both a private and public API. One for your staff to use to add and modify shipments, and one for customers or third party software to use to track it. 
 
+The objects are separated by function:
+
+- Shipment is the model
+- ShipmentManager interacts with the database through SQLiteStORM
+- Shipments uses ShipmentManager to produce JSON for the handlers
+- Handers contains the functions that the server uses to respond to requests
+- Database & PrivateAuth are helpers for setup and demo
+
 ## Compatibility with Swift
 
 The master branch of this project currently compiles with **Xcode 8.2** or the **Swift 3.0.2** toolchain on Ubuntu.
