@@ -47,11 +47,11 @@ let config = [
 			"name":"Private API",
 			"port":port2,
 			"routes": privateRoutes,
-//			"filters":[
-//                ["type":"request",
-//                "priority":"high",
-//                "name": AuthFilter()]
-//            ]
+			"filters":[
+                ["type":"request",
+                "priority":"high",
+                "name": HTTPFilter.authFilter]
+            ]
 		]
 	]
 ]

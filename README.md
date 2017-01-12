@@ -92,6 +92,12 @@ The private API routes at [http://localhost:8181/](http://127.0.0.1:8181/) are:
 /set/delivered
 /delete
 
+### IMPORTANT NOTE ABOUT THE PRIVATE API
+
+There is a filter on the private API that will return an unauthorized error if you do not add a header value to your request of key `token` and value `13100E4F22B84AD0A11E`
+
+This is to simulate an API key for private requests, showing that it's easy to make a public/private API pair using multiple server instances on groups of the same routes. 
+
 ### /count
 
 To use /count, you make a get request. It will return JSON containing a count of the number of shipments in the database. 
